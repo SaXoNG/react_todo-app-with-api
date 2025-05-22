@@ -137,9 +137,9 @@ export const TodoInfo: React.FC<Props> = ({
             something.current?.focus();
           }, 0);
 
-          setTimeout(() => {
-            setErrorMessage('');
-          }, 3000);
+          // setTimeout(() => {
+          //   setErrorMessage('');
+          // }, 3000);
         });
 
       return;
@@ -167,10 +167,6 @@ export const TodoInfo: React.FC<Props> = ({
         setTimeout(() => {
           something.current?.focus();
         }, 0);
-
-        setTimeout(() => {
-          setErrorMessage('');
-        }, 3000);
       });
   };
 
