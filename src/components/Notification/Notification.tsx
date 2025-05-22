@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import cn from 'classnames';
 
 type Props = {
@@ -11,6 +11,14 @@ export const Notification: React.FC<Props> = ({
   setErrorMessage,
 }) => {
   const localErrorMessage = errorMessage;
+
+  useEffect(() => {
+    if (errorMessage) {
+      setTimeout(() => {
+        setErrorMessage('');
+      }, 3000);
+    }
+  }, [errorMessage, setErrorMessage]);
 
   return (
     <div

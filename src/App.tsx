@@ -65,14 +65,8 @@ export const App: React.FC = () => {
       })
       .catch(() => {
         setErrorMessage('Unable to load todos');
-
-        if (!errorMessage) {
-          setTimeout(() => {
-            setErrorMessage('');
-          }, 3000);
-        }
       });
-  }, [errorMessage]);
+  }, []);
 
   if (!USER_ID) {
     return <UserWarning />;

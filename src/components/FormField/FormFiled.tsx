@@ -161,8 +161,6 @@ export const FormField: React.FC<Props> = ({
           onChange={changeHandle}
         />
       </form>
-
-      {/* Add a todo on form submit */}
     </header>
   );
 };
