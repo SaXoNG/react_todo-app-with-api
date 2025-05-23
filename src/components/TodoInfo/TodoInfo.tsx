@@ -107,7 +107,7 @@ export const TodoInfo: React.FC<Props> = ({
     e.preventDefault();
     setFocusedTodo(null);
 
-    if (title === inputText) {
+    if (title === inputText.trim()) {
       return;
     }
 

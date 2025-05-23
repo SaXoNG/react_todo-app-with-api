@@ -17,7 +17,7 @@ type Props = {
   setTodos: (todos: Todo[]) => void;
   setFormText: (formText: string) => void;
   setErrorMessage: (message: string) => void;
-  setShowTempTodo: (todo: Todo | null) => void;
+  setShowTempTodo: (boolean: boolean) => void;
 };
 
 const creatingTodoId = (todos: Todo[]): number => {
@@ -75,19 +75,19 @@ export const FormField: React.FC<Props> = ({
       userId: USER_ID,
     };
 
-    setShowTempTodo(newTodo);
+    setShowTempTodo(true);
     setDisabled(true);
 
     postTodo(newTodo)
       .then(responseTodo => {
         setDisabled(false);
-        setShowTempTodo(null);
+        setShowTempTodo(false);
         setTodos([...todos, responseTodo]);
         setFormText('');
       })
       .catch(() => {
         setDisabled(false);
-        setShowTempTodo(null);
+        setShowTempTodo(false);
         setErrorMessage('Unable to add a todo');
 
         if (!errorMessage) {

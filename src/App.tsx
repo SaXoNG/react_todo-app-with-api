@@ -1,30 +1,3 @@
-// /* eslint-disable max-len */
-// /* eslint-disable jsx-a11y/control-has-associated-label */
-// import React from 'react';
-// import { UserWarning } from './UserWarning';
-
-// const USER_ID = 2582;
-
-// export const App: React.FC = () => {
-//   if (!USER_ID) {
-//     return <UserWarning />;
-//   }
-
-//   return (
-//     <section className="section container">
-//       <p className="title is-4">
-//         Copy all you need from the prev task:
-//         <br />
-//         <a href="https://github.com/mate-academy/react_todo-app-loading-todos#react-todo-app-load-todos">
-//           React Todo App - Load Todos
-//         </a>
-//       </p>
-
-//       <p className="subtitle">Styles are already copied</p>
-//     </section>
-//   );
-// };
-
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import React, { useEffect, useMemo, useRef, useState } from 'react';
@@ -43,7 +16,7 @@ export const App: React.FC = () => {
   const [todosFilter, setTodosFilter] = useState(FilterOptions.All);
   const [errorMessage, setErrorMessage] = useState('');
   const [formText, setFormText] = useState('');
-  const [showTempTodo, setShowTempTodo] = useState<Todo | null>(null);
+  const [showTempTodo, setShowTempTodo] = useState(false);
   const [focusedTodo, setFocusedTodo] = useState<Todo | null>(null);
 
   const elemFocus = useRef<HTMLInputElement>(null);
@@ -88,17 +61,16 @@ export const App: React.FC = () => {
           setShowTempTodo={setShowTempTodo}
         />
 
-        {/* Hide the footer if there are no todos */}
-
         {todos.length > 0 && (
           <>
             <TodoList
-              setFocusedTodo={setFocusedTodo}
+              formText={formText}
               focusedTodo={focusedTodo}
               todos={todos}
               currentTodos={visibleTodos}
               showTempTodo={showTempTodo}
               errorMessage={errorMessage}
+              setFocusedTodo={setFocusedTodo}
               setTodos={setTodos}
               setErrorMessage={setErrorMessage}
               inputRef={elemFocus}
