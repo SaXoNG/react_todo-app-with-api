@@ -26,7 +26,13 @@ export const TodoInfo: React.FC<Props> = ({
   const { id, title, completed } = todo;
   const [todoLoading, setTodoLoading] = useState(false);
   const [inputText, setInputText] = useState(title);
-  const something = useRef<HTMLInputElement>(null);
+  const focusedCurrInput = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (focusedCurrInput.current) {
+      focusedCurrInput.current?.focus();
+    }
+  }, [focusedTodo]);
 
   useEffect(() => {
     const callback = (e: KeyboardEvent) => {
@@ -78,27 +84,20 @@ export const TodoInfo: React.FC<Props> = ({
           someTodo => someTodo.id !== todoId,
         );
 
-        setTimeout(() => {
-          inputRef.current?.focus();
-        }, 200);
-
-        setTimeout(() => {
-          setTodos(filterTodos);
-        }, 500);
+        setTodos(filterTodos);
       })
       .catch(() => {
-        setTimeout(() => {
-          setErrorMessage('Unable to delete a todo');
-          setTodoLoading(false);
-        }, 200);
+        setErrorMessage('Unable to delete a todo');
+      })
+      .finally(() => {
+        setTodoLoading(false);
+
+        inputRef.current?.focus();
       });
   };
 
   const doubleClickHandler = () => {
     setFocusedTodo(todo);
-    setTimeout(() => {
-      something.current?.focus();
-    }, 0);
   };
 
   const updateTextTodo = (
@@ -120,22 +119,16 @@ export const TodoInfo: React.FC<Props> = ({
             someTodo => someTodo.id !== id,
           );
 
-          setTimeout(() => {
-            inputRef.current?.focus();
-          }, 200);
-
-          setTimeout(() => {
-            setTodos(filterTodos);
-          }, 500);
+          setTodos(filterTodos);
         })
         .catch(() => {
           setErrorMessage('Unable to delete a todo');
           setInputText(title);
           setTodoLoading(false);
           setFocusedTodo(todo);
-          setTimeout(() => {
-            something.current?.focus();
-          }, 0);
+        })
+        .finally(() => {
+          inputRef.current?.focus();
         });
 
       return;
@@ -160,9 +153,6 @@ export const TodoInfo: React.FC<Props> = ({
         setInputText(title);
         setTodoLoading(false);
         setFocusedTodo(todo);
-        setTimeout(() => {
-          something.current?.focus();
-        }, 0);
       });
   };
 
@@ -193,7 +183,7 @@ export const TodoInfo: React.FC<Props> = ({
             placeholder="Empty todo will be deleted"
             value={inputText}
             onChange={e => setInputText(e.target.value)}
-            ref={something}
+            ref={focusedCurrInput}
             onBlur={updateTextTodo}
           />
         </form>

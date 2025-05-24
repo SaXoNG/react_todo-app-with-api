@@ -43,9 +43,7 @@ export const Footer: React.FC<Props> = ({
     }
 
     setTodos(preparedTodos);
-    setTimeout(() => {
-      inputRef.current?.focus();
-    }, 190);
+    inputRef.current?.focus();
   }
 
   return (

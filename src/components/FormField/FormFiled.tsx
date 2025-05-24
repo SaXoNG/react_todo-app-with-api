@@ -34,7 +34,6 @@ export const FormField: React.FC<Props> = ({
   elementFocus,
   formText,
   todos,
-  errorMessage,
   setTodos,
   setErrorMessage,
   setFormText,
@@ -58,12 +57,6 @@ export const FormField: React.FC<Props> = ({
 
     if (!trimmedText) {
       setErrorMessage('Title should not be empty');
-
-      if (!errorMessage) {
-        setTimeout(() => {
-          setErrorMessage('');
-        }, 3000);
-      }
 
       return;
     }
@@ -89,12 +82,6 @@ export const FormField: React.FC<Props> = ({
         setDisabled(false);
         setShowTempTodo(false);
         setErrorMessage('Unable to add a todo');
-
-        if (!errorMessage) {
-          setTimeout(() => {
-            setErrorMessage('');
-          }, 3000);
-        }
       });
   };
 
